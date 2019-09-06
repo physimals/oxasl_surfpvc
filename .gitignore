@@ -2,7 +2,7 @@
 *.mat
 *.pyc
 build*
-oxasl_ve/_version.py
+oxasl_surfpvc/_version.py
 dist
-oxasl_ve.egg-info/
+oxasl_surfpvc.egg-info/
 .pytest_cache
