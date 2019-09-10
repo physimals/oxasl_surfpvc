@@ -37,11 +37,12 @@ def prepare_surf_pvs(wsp):
     wsp.sub('surf_pvs')
 
     if not toblerone.utils.check_anat_dir(wsp.fslanat):
-        raise RuntimeError("fsl_anat dir not complete with surfaces")
+        raise RuntimeError("fsl_anat dir not complete with surfaces. " + 
+            "See the documentation at the command line: toblerone -fsl_fs_anat")
 
     if True: 
         pvs, _ = toblerone.estimate_all(ref=ref, anat=wsp.fslanat, struct2ref=struct2asl, flirt=True)
-
+        print("Estimating PVs using surfaces")
         spc = toblerone.classes.ImageSpace(ref)
         for k, v in pvs.items():
             spc.saveImage(v, op.join(wsp.surf_pvs.savedir, k + '.nii.gz'))
