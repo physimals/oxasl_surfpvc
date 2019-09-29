@@ -41,14 +41,14 @@ def prepare_surf_pvs(wsp):
             "See the documentation at the command line: toblerone -fsl_fs_anat")
 
     if True: 
-        pvs, _ = toblerone.estimate_all(ref=ref, anat=wsp.fslanat, struct2ref=struct2asl, flirt=True)
-        print("Estimating PVs using surfaces")
+        pvs = toblerone.estimate_all(ref=ref, anat=wsp.fslanat, struct2ref=struct2asl, 
+            flirt=True, struct=struct)
         spc = toblerone.classes.ImageSpace(ref)
         for k, v in pvs.items():
-            spc.saveImage(v, op.join(wsp.surf_pvs.savedir, k + '.nii.gz'))
+            spc.save_image(v, op.join(wsp.surf_pvs.savedir, k + '.nii.gz'))
         
     wm, gm = [
-        Image(op.join(wsp.surf_pvs.savedir, 'all_%s.nii.gz' % t)) 
+        Image(op.join(wsp.surf_pvs.savedir, '%s.nii.gz' % t)) 
         for t in ['WM', 'GM'] 
     ]
     wsp.basil_options.update({"pwm" : wm, "pgm" : gm})
