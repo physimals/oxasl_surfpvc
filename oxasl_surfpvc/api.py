@@ -7,6 +7,7 @@ Copyright (c) 2018-2019 Univerisity of Oxford
 """
 
 import os.path as op 
+import multiprocessing
 
 from fsl.data.image import Image
 
@@ -41,8 +42,13 @@ def prepare_surf_pvs(wsp):
             "See the documentation at the command line: toblerone -fsl_fs_anat")
 
     if True: 
+        if wsp.cores is not None: 
+            cores = int(wsp.cores)
+        else: 
+            cores = multiprocessing.cpu_count()
+
         pvs = toblerone.estimate_all(ref=ref, anat=wsp.fslanat, struct2ref=struct2asl, 
-            flirt=True, struct=struct)
+            flirt=True, struct=struct, cores=cores)
         spc = toblerone.classes.ImageSpace(ref)
         for k, v in pvs.items():
             spc.save_image(v, op.join(wsp.surf_pvs.savedir, k + '.nii.gz'))
