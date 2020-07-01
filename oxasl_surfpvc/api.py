@@ -33,8 +33,8 @@ def prepare_surf_pvs(wsp):
 
     # Estimate WM and GM PVs
     struct2asl = wsp.reg.struc2asl
-    ref = wsp.reg.regfrom.dataSource
-    struct = wsp.reg.regto.dataSource
+    ref = wsp.asldata.dataSource
+    struct = wsp.strutural.struc.dataSource
     wsp.sub('surf_pvs')
 
     if not toblerone.utils.check_anat_dir(wsp.fslanat):
