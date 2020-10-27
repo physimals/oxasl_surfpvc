@@ -49,7 +49,7 @@ def prepare_surf_pvs(wsp):
     # We need transformation (FLIRT) from structural to reference space. 
     struct2asl = wsp.reg.struc2asl
     ref = wsp.asldata.dataSource
-    struct = wsp.strutural.struc.dataSource
+    struct = wsp.structural.struc.dataSource
     wsp.sub('surf_pvs')
 
     if True: 
